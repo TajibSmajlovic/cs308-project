@@ -1,0 +1,9 @@
+body > div,
+body > div > div  {
+    height: 100%;
+    margin: auto;
+}
+
+.Grid {
+    height: 100%!important;
+}
