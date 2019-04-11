@@ -2,6 +2,9 @@ import React, { Component } from "react";
 
 import Aux from "../hoc/Auxiliary/Auxiliary";
 import EventList from "../components/event-list/eventlist";
+import Navigation from "../containers/Navigation/Navigation";
+import Footer from "../components/Footer/Footer";
+
 
 class App extends Component {
 
@@ -19,8 +22,12 @@ class App extends Component {
   render() {
     return (
       <Aux>
-        <EventList events={this.state.events}/>
-        <EventList events={this.state.events}/>
+        <Navigation />
+        <div>
+            <EventList events={this.state.events}/>
+            <EventList events={this.state.events}/>
+        </div>
+        <Footer />
       </Aux>
     );
   }
