@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 
 import Aux from "../hoc/Auxiliary/Auxiliary";
-import Test from "../components/test";
+import Navigation from "../containers/Navigation/Navigation";
+import Footer from "../components/Footer/Footer";
 
 class App extends Component {
   render() {
     return (
       <Aux>
-        <Test />
+        <Navigation />
+        <Footer />
       </Aux>
     );
   }
