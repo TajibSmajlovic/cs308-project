@@ -1,0 +1,18 @@
+.EventCard {
+    border: 1px solid black;
+    display: flex;
+    min-width: 400px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 10px;
+}
+.EventInfo{
+    flex-basis: 55%;
+    padding: 20px ;
+}
+
+.EventPoster {
+    background: red;
+    flex-basis: 45%;
+    height: 100%;
+}
