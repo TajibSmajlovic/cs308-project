@@ -1,0 +1,7 @@
+.EventList{
+    margin-top: 50px;
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+    height: 300px;
+}
