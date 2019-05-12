@@ -4,12 +4,12 @@ import { Container, Grid, List, Segment, Input } from "semantic-ui-react";
 const Footer = () => (
   <Segment
     inverted
-    style={{ position: "absolute", bottom: 0, width: "100%", height: "15%" }}
+    style={{ height: "17%" }}
   >
     <Container textAlign="center">
       <Grid columns="equal">
-        <Grid.Column>
-          <List inverted divided link size="medium">
+        <Grid.Column style={{ display: 'flex', alignItems: 'flex-end' }}>
+          <List inverted horizontal divided link size="medium" >
             <List.Item as="a" href="#">
               Todo #1
             </List.Item>
