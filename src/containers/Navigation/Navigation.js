@@ -5,7 +5,7 @@ import { Grid, Menu, Input } from "semantic-ui-react";
 class Navigation extends Component {
   state = { activeItem: "home" };
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleItemClick = (e, { name }) => { this.setState({ activeItem: name }); this.props.history.push("/")};
 
   render() {
     const { activeItem } = this.state;
@@ -30,6 +30,11 @@ class Navigation extends Component {
                 name="party"
                 active={activeItem === "party"}
                 onClick={this.handleItemClick}
+              />
+              <Menu.Item
+                name="createEvent"
+                active={activeItem === "createEvent"}
+                onClick={() => this.props.history.push("/create-event")}
               />
               <Menu.Menu position="right">
                 <Menu.Item>
