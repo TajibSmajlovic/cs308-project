@@ -1,9 +1,59 @@
 import React, { Component } from 'react';
-import { Grid, Header, Form, Select } from 'semantic-ui-react'
+import { Grid, Header, Form, Select, Button } from 'semantic-ui-react'
+import { withRouter } from "react-router-dom"
+import { connect } from 'react-redux'
+import * as actions from '../../store'
 import './EventModifier.css'
 import ImagePicker from '../ImagePicker/ImagePicker';
 
 class EventModifier extends Component {
+
+    state = {
+        form: {
+            title: '',
+            description: '',
+            date: '',
+            time: '',
+            venue: '',
+        },
+        img: { }
+    }
+
+    isValid = () => {
+        let valid = true;
+        Object.keys(this.state.form).map(key => (
+            valid = valid && this.state.form[key]
+        ))
+        return valid;
+    }
+
+    changeHandler = (key, value) => {
+        this.setState(old => ({
+            ...old,
+            form: {
+                ...old.form,
+                [key]: value
+            }
+        }))
+    }
+
+    imgHandler = (data, file) => {
+        this.setState({
+            img: {
+                src: data,
+                file
+            }
+        })
+    }
+
+    submitHandler = () => {
+        this.props.createEvent(this.state.form, this.state.img.file)
+            .then(res => {
+                this.props.history.replace('/')
+            })
+    }
+
+
     render() {
         return (
             <div style={{ padding: "50px" }}>
@@ -11,32 +61,40 @@ class EventModifier extends Component {
                 <Grid columns={2}>
                     <Grid.Row>
                         <Grid.Column>
-                            <Form>
+                            <Form onSubmit={this.submitHandler}>
                                 <Form.Field>
                                     <label>Title</label>
-                                    <input placeholder='Title' />
+                                    <input onChange={e => this.changeHandler('title', e.target.value)} placeholder='Title' />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Description</label>
-                                    <textarea  placeholder='Short description...' />
+                                    <textarea onChange={e => this.changeHandler('description', e.target.value)} placeholder='Short description...' />
                                 </Form.Field>
                                 <Form.Field>
                                     <Form.Group unstackable widths={2}>
-                                        <Form.Input type="date" label='Date' />
-                                        <Form.Input label='Time' type="time" />
+                                        <Form.Input onChange={e => this.changeHandler('date', e.target.value)} type="date" label='Date' />
+                                        <Form.Input onChange={e => this.changeHandler('time', e.target.value)} label='Time' type="time" />
                                     </Form.Group>
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Venue</label>
-                                    <Select placeholder="Choose Venue" options={[
-                                        {key: '1', value: "rah", text: "Royal Albert Hall"},
-                                        {key: '2', value: "mad", text: "Madison Square Garden"},
-                                    ]}/>
+                                    <Select placeholder="Choose Venue" 
+                                        onChange={(e, data) => this.changeHandler('venue', data.value)}
+                                        options={[
+                                            {key: '1', value: "Royal Albert Hall", text: "Royal Albert Hall"},
+                                            {key: '2', value: "Madison Square Garden", text: "Madison Square Garden"},
+                                        ]}/>
+                                </Form.Field>
+                                <Form.Field>
+                                    <Button onClick={() => this.props.history.replace('/')} color='red'>Cancel</Button>
+                                    {/* <Button type="submit" disabled={!this.isValid()} primary>Submit</Button> */}
+                                    <Button type="submit" primary>Submit</Button>
                                 </Form.Field>
                             </Form>
                         </Grid.Column>
                         <Grid.Column>
-                            <ImagePicker />
+                            <ImagePicker img={this.state.img.src} 
+                                         imgHandler={this.imgHandler} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -45,4 +103,4 @@ class EventModifier extends Component {
     }
 }
 
-export default EventModifier;
+export default connect(null, actions)(withRouter(EventModifier));
