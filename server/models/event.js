@@ -7,7 +7,7 @@ const eventSchema = new Schema({
     venue: String,
     imgUrl: String,
     dateCreated: { type: Date, default: Date.now() },
-    date: String,
+    date: Date,
     time: String,
 })
 

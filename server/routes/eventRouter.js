@@ -7,7 +7,9 @@ router.post('/', eventController.createEvent);
 
 // router.get('/:uri', eventController.getEvent);
 
-// router.get('/', eventController.getMostRecent);
+router.get('/most-recent', eventController.getMostRecent);
+
+router.get('/all', eventController.getAll);
 
 // router.put('/:id', checkAuth, eventController.editEvent);
 

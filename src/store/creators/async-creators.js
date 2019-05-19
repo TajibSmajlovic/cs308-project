@@ -45,3 +45,18 @@ const uploadImg = (data) => {
         })
     })
 }
+
+const getMostRecent = () => dispatch => axios.get('/event/most-recent')
+
+const getAll = () => dispatch => axios.get('/event/all')
+
+export const getEvents = () => dispatch => {
+    return new Promise((resolve, reject) => {
+        dispatch(startLoading())
+        Promise.all([getMostRecent()(), getAll()()])
+            .then(res => {
+                dispatch(endLoading())
+                resolve(res)
+            })
+    })
+}

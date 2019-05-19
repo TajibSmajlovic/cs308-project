@@ -4,6 +4,7 @@ const createEvent = async (req, res) => {
     try{
         const eventData = {
             ...req.body,
+            date: new Date(req.body.date)
         }
         const event = await new Event(eventData).save();
         res.status(200).json(event);
@@ -76,36 +77,32 @@ const deleteEvent = async (req, res) => {
 }
 
 const getMostRecent = async (req, res) => {
-    // try{
-    //     const start = +req.query.start;
-    //     const count = await Post.aggregate([
-    //         { $match: {$or: [{ author: req.user._id }, { author: { $in: req.user.following }}]}},
-    //         { $count: "posts" }
-    //     ]);
-    //     const posts = await Post
-    //     .find({
-    //         $or: [{ author: req.user._id }, { author: { $in: req.user.following }}]
-    //     })
-    //     .skip(start)
-    //     .limit(10)
-    //     .sort({ dateCreated: -1 })
-    //     .populate('author', { avatarUrl: 1, name: 1, surname: 1, uri: 1 })
-    //     const ret = {
-    //         posts, 
-    //         count: count[0] ? count[0].posts : 0
-    //     }
-        
-    //     res.status(200).json(ret);
-    // }catch(err){
-    //     console.log(err.message);
-    //     res.status(500).end(err.message)
-    // }
+    try{
+        const events = await Event.find({
+            date: { "$gte": Date.now() - 2 * 86400000 }
+        }).limit(6)
+        res.status(200).json(events);
+    }catch(err){
+        console.log(err.message);
+        res.status(500).end(err.message)
+    }
+}
+
+const getAll = async (req, res) => {
+    try{
+        const events = await Event.find({}).limit(6)
+        res.status(200).json(events);
+    }catch(err){
+        console.log(err.message);
+        res.status(500).end(err.message)
+    }
 }
 
 module.exports = {
     createEvent,
     getEvent,
     getMostRecent,
+    getAll,
     editEvent,
     deleteEvent
 };

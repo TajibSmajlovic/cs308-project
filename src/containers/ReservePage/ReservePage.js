@@ -3,9 +3,10 @@ import { Modal, Button, Image, Header } from "semantic-ui-react";
 
 export default class ReservePage extends Component {
   render() {
+    const date = new Date(this.props.event.date).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     return (
       <Modal
-        trigger={<Button>Show Modal</Button>}
+        trigger={<Button>Book now</Button>}
         dimmer
         style={{ overflow: "auto" }}
       >
@@ -13,33 +14,18 @@ export default class ReservePage extends Component {
           Reserve Seats
         </Modal.Header>
         <Modal.Content image>
-          <Image
-            wrapped
-            size="medium"
-            src="https://img.moviepostershop.com/replicas-movie-poster-2019-1000778791.jpg"
-          />
+          <div style={{ width: "50%", height: "500px", backgroundImage: `url('${this.props.event.imgUrl}')`, backgroundPosition: 'center', backgroundSize: 'cover', borderRadius: '10px'}}>
+
+          </div>
           <Modal.Description style={{ width: "50%", marginLeft: "10%" }}>
-            <Header>Name of the event</Header>
+            <Header>{this.props.event.title}</Header>
             <p style={{ textAlign: "justify" }}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos eum
-              ipsa voluptatibus! Adipisci aspernatur consequatur dolor, dolorum
-              incidunt iure libero minima nisi nostrum odit ratione suscipit
-              tenetur unde ut veniam! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Eos eum ipsa voluptatibus! Adipisci aspernatur
-              consequatur dolor, dolorum incidunt iure libero minima nisi
-              nostrum odit ratione suscipit tenetur unde ut veniam! Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit. Eos eum ipsa
-              voluptatibus! Adipisci aspernatur consequatur dolor, dolorum
-              incidunt iure libero minima nisi nostrum odit ratione suscipit
-              tenetur unde ut veniam! Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Eos eum ipsa voluptatibus! Adipisci aspernatur
-              consequatur dolor, dolorum incidunt iure libero minima nisi
-              nostrum odit ratione suscipit tenetur unde ut veniam!
+              {this.props.event.description}
             </p>
-            <div style={{ width: 150, height: 50, border: "1px solid black" }}>
-              <b>[12.04.2018]</b> -<b>20:00h</b>
-            </div>
-            <b>PRICE: $$ (per seat)</b>
+            {/* <div style={{ width: 150, height: 50, border: "1px solid black" }}> */}
+              <p>On <b>{date}</b> at <b>{this.props.event.time}</b> in <b>{this.props.event.venue}</b></p>        
+            {/* </div> */}
+            <b>PRICE: 10 BAM (per seat)</b>
           </Modal.Description>
         </Modal.Content>
         <hr />
