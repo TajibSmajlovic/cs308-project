@@ -4,17 +4,17 @@ import ReservePage from "../../containers/ReservePage/ReservePage";
 import "./EventCard.css";
 
 const EventCard = ({ event }) => {
+  const date = new Date(event.date).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   return (
     <div className="EventCard">
       <div className="EventInfo">
-        <h2>{event.name}</h2>
-        <p>{event.description}</p>
-        <p>{event.venue}</p>
+        <h2>{event.title}</h2>
+        <p>On <b>{date}</b> at <b>{event.time}</b> in <b>{event.venue}</b></p>
         <div style={{ marginTop: "60%" }}>
-          <ReservePage />
+          <ReservePage event={event} />
         </div>
       </div>
-      <div className="EventPoster" style={{ backgroundImage: event.img }} />
+      <div className="EventPoster" style={{ backgroundImage: `url('${event.imgUrl}')` }} />
     </div>
   );
 };
