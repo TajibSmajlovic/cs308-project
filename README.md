@@ -1,13 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Steps to run the project
 
-## Available Scripts
+### `1. npm install`
 
-In the project directory, you can run:
+Installs client dependencies.
 
-### `npm start`
+### `2. npm run install:server`
+
+Installs server dependencies.
+
+### `3. npm run server`
+
+Server will start on **localhost:8000**.
+
+### `4. npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm run server`
 
-Server will start on **localhost:8000**.
+
+*Steps 1 and 2 need to be performed only when starting project for the first time.*

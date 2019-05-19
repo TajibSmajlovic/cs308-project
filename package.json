@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "install:server": "cd server && npm install",
     "server": "cd server && nodemon server",
     "build": "react-scripts build",
     "test": "react-scripts test",
