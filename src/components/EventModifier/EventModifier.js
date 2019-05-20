@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Header, Form, Select, Button } from 'semantic-ui-react'
-import { withRouter } from "react-router-dom"
+import { Redirect, withRouter } from "react-router-dom"
 import { connect } from 'react-redux'
 import * as actions from '../../store'
 import './EventModifier.css'
@@ -55,6 +55,7 @@ class EventModifier extends Component {
 
 
     render() {
+        if(!this.state.user || this.state.user && this.state.user.role != 'admin') return <Redirect to='/'/>
         return (
             <div style={{ padding: "50px" }}>
                 <Header as="h1" textAlign="center">Create New Event</Header>
@@ -78,7 +79,7 @@ class EventModifier extends Component {
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Venue</label>
-                                    <Select placeholder="Choose Venue" 
+                                    <Select placeholder="Choose Venue"
                                         onChange={(e, data) => this.changeHandler('venue', data.value)}
                                         options={[
                                             {key: '1', value: "Royal Albert Hall", text: "Royal Albert Hall"},
@@ -87,13 +88,12 @@ class EventModifier extends Component {
                                 </Form.Field>
                                 <Form.Field>
                                     <Button onClick={() => this.props.history.replace('/')} color='red'>Cancel</Button>
-                                    {/* <Button type="submit" disabled={!this.isValid()} primary>Submit</Button> */}
-                                    <Button type="submit" primary>Submit</Button>
+                                    <Button type="submit" disabled={!this.isValid()} primary>Submit</Button>
                                 </Form.Field>
                             </Form>
                         </Grid.Column>
                         <Grid.Column>
-                            <ImagePicker img={this.state.img.src} 
+                            <ImagePicker img={this.state.img.src}
                                          imgHandler={this.imgHandler} />
                         </Grid.Column>
                     </Grid.Row>
@@ -103,4 +103,4 @@ class EventModifier extends Component {
     }
 }
 
-export default connect(null, actions)(withRouter(EventModifier));
+export default connect(state => ({user: state.auth.user}), actions)(withRouter(EventModifier));

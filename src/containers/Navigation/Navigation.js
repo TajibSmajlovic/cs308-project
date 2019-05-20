@@ -35,11 +35,13 @@ class Navigation extends Component {
                 active={activeItem === "party"}
                 onClick={this.handleItemClick}
               />
-              <Menu.Item
-                name="createEvent"
-                active={activeItem === "createEvent"}
-                onClick={() => this.props.history.push("/create-event")}
-              />
+              {this.state.user && this.state.user.role == 'admin' ? (
+                <Menu.Item
+                  name="createEvent"
+                  active={activeItem === "createEvent"}
+                  onClick={() => this.props.history.push("/create-event")}
+                />
+              ) : null}
               <Menu.Menu position="right">
                 <Menu.Item>
                   <Input onChange={search} icon="search" placeholder="Search..." />
