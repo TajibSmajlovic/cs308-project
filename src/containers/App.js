@@ -11,7 +11,9 @@ class App extends Component {
 
   state = {
     recent: [],
-    all: []
+    all: [],
+	search: '',
+	searchResults: []
   }
 
   componentWillMount(){
@@ -24,12 +26,29 @@ class App extends Component {
         })
       })
   }
-  
+
+  handleSearchInput = event => {
+	this.setState({search: event.target.value},() => this.searchMessages())
+  	}
+
+	searchMessages = () => {
+		const allEvents = [...this.state.all];
+		const regex = new RegExp(this.state.search, "gi");
+		const searchResults = allEvents.reduce((accumulator, event) => {
+			if (event.title && event.title.match(regex)) {
+				accumulator.push(event);
+			}
+			return accumulator;
+		}, []);
+		this.setState({ searchResults });
+	};
+
 
   render() {
     return (
       <Aux>
-        <Navigation />
+        <Navigation search={this.handleSearchInput}/>
+		  {this.state.searchResults.length > 0 ? <EventList title="Searched" events={this.state.searchResults} /> : null}
         <EventList title="Most Recent" events={this.state.recent} />
         <EventList title="All" events={this.state.all} />
         <Footer />

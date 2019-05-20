@@ -12,6 +12,7 @@ class Navigation extends Component {
 
   render() {
     const { activeItem } = this.state;
+    const { search } = this.props;
 
     return (
       <Grid style={{ height: "8vh" }}>
@@ -41,7 +42,7 @@ class Navigation extends Component {
               />
               <Menu.Menu position="right">
                 <Menu.Item>
-                  <Input icon="search" placeholder="Search..." />
+                  <Input onChange={search} icon="search" placeholder="Search..." />
                 </Menu.Item>
                 {this.props.user ? (
                     <Menu.Item
