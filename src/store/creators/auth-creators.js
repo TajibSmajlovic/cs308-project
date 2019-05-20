@@ -14,10 +14,10 @@ export const logout = () => async dispatch => {
 }
 
 export const checkCookies = () => async dispatch => {
-    /*const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'))
     const token = JSON.parse(localStorage.getItem('token'))
     if(user && token)
-        dispatch(setData({user, token}))*/
+        dispatch(setData({user, token}))
 }
 
 export const storeCookies = async (data) => {
