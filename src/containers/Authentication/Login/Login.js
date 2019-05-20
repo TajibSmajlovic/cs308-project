@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
+import { Link, Redirect } from "react-router-dom";
 import {
   Grid,
   Form,
@@ -12,6 +13,8 @@ import {
 import styles from "./Login.module.css";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
+import * as actions from '../../../store/creators/async-creators'
+
 class Register extends Component {
   state = {
     email: "",
@@ -23,7 +26,17 @@ class Register extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  submit = () => {
+    this.props.login({...this.state})
+  };
+
+  isValid = () => {
+    return this.state.email && this.state.password
+  }
+
   render() {
+    if(this.props.user) return <Redirect to='/' />
+
     return (
       <Aux>
         <Grid textAlign="center" verticalAlign="middle" className={styles.Grid}>
@@ -31,7 +44,7 @@ class Register extends Component {
             <Header as="h1" color="blue" textAlign="center">
               [LOGO]
             </Header>
-            <Form size="large" autoComplete="off">
+            <Form size="large" autoComplete="off" onSubmit={this.submit}>
               <Segment>
                 <Header as="h2" style={{ color: "royalblue" }}>
                   Welcome to sjedi.ba
@@ -57,7 +70,7 @@ class Register extends Component {
                   type="password"
                 />
 
-                <Button primary fluid size="large">
+                <Button disabled={!this.isValid()} primary fluid size="large">
                   Login
                 </Button>
               </Segment>
@@ -72,4 +85,10 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = state => {
+  return{
+    user: state.auth.user
+  }
+}
+
+export default connect(mapStateToProps, actions)(Register);

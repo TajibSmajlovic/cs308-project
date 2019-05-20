@@ -6,7 +6,7 @@ const app = express()
 const port = process.env.PORT || 8000;
 
 require('./db')();
-// require('./utlity/passport')
+require('./passport')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 });
 
 // app.use(require('./utlity/tokenChecker'));
+
 
 app.use('/api', require('./routes.js'));
 

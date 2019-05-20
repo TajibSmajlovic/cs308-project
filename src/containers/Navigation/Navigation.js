@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Grid, Menu, Input } from "semantic-ui-react";
+import { connect } from 'react-redux'
+import * as actions from '../../store/creators/auth-creators'
+import Aux from "../../hoc/Auxiliary/Auxiliary";
 
 class Navigation extends Component {
   state = { activeItem: "home" };
@@ -40,17 +43,23 @@ class Navigation extends Component {
                 <Menu.Item>
                   <Input icon="search" placeholder="Search..." />
                 </Menu.Item>
-                <Menu.Item
-                  name="login"
-                  onClick={() => this.props.history.push("/login")}
-                />
-                <Menu.Item
-                  name="register"
-                  onClick={() => this.props.history.push("/register")}
-                />
-                {/* <Menu.Item
-									name='logout'
-								/> */}
+                {this.props.user ? (
+                    <Menu.Item
+                      name='logout'
+                      onClick={this.props.logout}
+                    />
+                ): (
+                  <Aux>
+                    <Menu.Item
+                      name="login"
+                      onClick={() => this.props.history.push("/login")}
+                      />
+                    <Menu.Item
+                      name="register"
+                      onClick={() => this.props.history.push("/register")}
+                      />
+                  </Aux>
+                )}
               </Menu.Menu>
             </Menu>
           </Grid.Column>
@@ -59,4 +68,11 @@ class Navigation extends Component {
     );
   }
 }
-export default withRouter(Navigation);
+
+const mapStateToProps = state => {
+  return{
+    user: state.auth.user
+  }
+}
+
+export default connect(mapStateToProps, actions)(withRouter(Navigation));
