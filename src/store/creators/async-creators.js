@@ -1,17 +1,18 @@
 import { storage } from '../../utility/firebase'
 import axios from '../../utility/axios'
 import { startLoading, endLoading } from './ui-creators';
+import { setData, storeCookies } from './auth-creators'
 
 export const createEvent = (data, file) => {
     return dispatch => {
-        return new Promise((resolve, reject) => {     
+        return new Promise((resolve, reject) => {
             dispatch(startLoading())
             uploadImg(file)
                 .then(imgUrl => (
                     axios.post('/event', {
                         ...data,
                         imgUrl
-                    })    
+                    })
                 ))
                 .catch(err => {
                     console.log(err)
@@ -58,5 +59,33 @@ export const getEvents = () => dispatch => {
                 dispatch(endLoading())
                 resolve(res)
             })
+    })
+}
+
+export const register = (data) => dispatch => {
+    dispatch(startLoading())
+    axios.post('/user/register', {
+        ...data
+    }).then(res => {
+        dispatch(setData(res.data))
+        storeCookies(res.data)
+        dispatch(endLoading())
+    }).catch((err) => {
+        console.log(err)
+        dispatch(endLoading())
+    })
+}
+
+export const login = (data) => dispatch => {
+    dispatch(startLoading())
+    axios.post('/user/login', { ...data })
+    .then(res => {
+        dispatch(setData(res.data))
+        storeCookies(res.data)
+        dispatch(endLoading())
+    })
+    .catch((err) => {
+        console.log(err)
+        dispatch(endLoading())
     })
 }

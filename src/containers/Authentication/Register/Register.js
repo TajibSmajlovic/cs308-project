@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from 'react-redux'
 import {
   Grid,
   Form,
@@ -11,6 +12,8 @@ import {
 
 import styles from "./Register.module.css";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
+
+import * as actions from '../../../store/creators/async-creators'
 
 class Register extends Component {
   state = {
@@ -25,15 +28,18 @@ class Register extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  isFormEmpty = () => {};
+  isValid = () => {
+    let valid = this.state.username && this.state.email && this.state.password && this.state.passwordConfirmed
+    if(!valid) return false
+    return this.state.password === this.state.passwordConfirmed
+  }
 
-  isFormValid = () => {};
-
-  isPasswordValid = () => {};
-
-  saveUser = () => {};
+  submit = () => {
+    this.props.register({...this.state})
+  };
 
   render() {
+    if(this.props.user) return <Redirect to="/" />
     return (
       <Aux>
         <Grid textAlign="center" verticalAlign="middle" className={styles.Grid}>
@@ -41,7 +47,7 @@ class Register extends Component {
             <Header as="h1" color="blue" textAlign="center">
               [LOGO]
             </Header>
-            <Form size="large" autoComplete="off">
+            <Form size="large" autoComplete="off" onSubmit={this.submit}>
               <Segment>
                 <Header as="h2" style={{ color: "royalblue" }}>
                   Welcome to sjedi.ba
@@ -78,7 +84,7 @@ class Register extends Component {
 
                 <Form.Input
                   fluid
-                  name="passwordConfirmation"
+                  name="passwordConfirmed"
                   icon="repeat"
                   iconPosition="left"
                   placeholder="Password Confirmation"
@@ -86,7 +92,7 @@ class Register extends Component {
                   type="password"
                 />
 
-                <Button primary fluid size="large">
+                <Button primary fluid disabled={!this.isValid()} size="large">
                   Register
                 </Button>
               </Segment>
@@ -101,4 +107,10 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  }
+}
+
+export default connect(mapStateToProps, actions)(Register);

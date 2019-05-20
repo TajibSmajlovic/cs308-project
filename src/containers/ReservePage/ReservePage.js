@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Image, Header } from "semantic-ui-react";
+import { Modal, Button, Header } from "semantic-ui-react";
 
 export default class ReservePage extends Component {
   render() {
