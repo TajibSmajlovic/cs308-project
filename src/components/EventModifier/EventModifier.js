@@ -55,7 +55,7 @@ class EventModifier extends Component {
 
 
     render() {
-        if(!this.state.user || this.state.user && this.state.user.role != 'admin') return <Redirect to='/'/>
+        if(!this.props.user || (this.props.user && this.props.user.role !== 'admin')) return <Redirect to='/'/>
         return (
             <div style={{ padding: "50px" }}>
                 <Header as="h1" textAlign="center">Create New Event</Header>

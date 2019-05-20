@@ -23,7 +23,7 @@ class Root extends React.Component {
           <Route path="/" exact component={App} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/create-event" component={EventModifer} /> //protected route
+          <Route path="/create-event" component={EventModifer} />
         </Switch>
       </BrowserRouter>
     )

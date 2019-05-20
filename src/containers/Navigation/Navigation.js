@@ -35,7 +35,7 @@ class Navigation extends Component {
                 active={activeItem === "party"}
                 onClick={this.handleItemClick}
               />
-              {this.state.user && this.state.user.role == 'admin' ? (
+              {this.props.user && this.props.user.role === 'admin' ? (
                 <Menu.Item
                   name="createEvent"
                   active={activeItem === "createEvent"}
