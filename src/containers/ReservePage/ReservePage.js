@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button, Header } from "semantic-ui-react";
 
-import CinemaSeats from '../SeatsMap/CinemaSeats/CinemaSeats'
+import CinemaSeats, {calculatePrice} from '../SeatsMap/CinemaSeats/CinemaSeats'
 
 export default class ReservePage extends Component {
   render() {

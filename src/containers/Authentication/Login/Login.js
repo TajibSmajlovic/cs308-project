@@ -12,6 +12,7 @@ import {
 
 import styles from "./Login.module.css";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Logo from '../../../components/Logo/Logo'
 
 import * as actions from '../../../store/creators/async-creators'
 
@@ -42,11 +43,11 @@ class Register extends Component {
         <Grid textAlign="center" verticalAlign="middle" className={styles.Grid}>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h1" color="blue" textAlign="center">
-              [LOGO]
+              <Logo/>
             </Header>
             <Form size="large" autoComplete="off" onSubmit={this.submit}>
               <Segment>
-                <Header as="h2" style={{ color: "royalblue" }}>
+                <Header as="h2" color='blue'>
                   Welcome to sjedi.ba
                 </Header>
 
@@ -70,7 +71,7 @@ class Register extends Component {
                   type="password"
                 />
 
-                <Button disabled={!this.isValid()} primary fluid size="large">
+                <Button disabled={!this.isValid()} color='google plus' fluid size="large">
                   Login
                 </Button>
               </Segment>

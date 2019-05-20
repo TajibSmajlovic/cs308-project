@@ -14,7 +14,6 @@ class Root extends React.Component {
   componentDidMount(){
     this.props.checkCookies();
   }
-
   render() {
     return(
       <BrowserRouter>

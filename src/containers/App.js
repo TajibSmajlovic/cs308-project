@@ -48,7 +48,7 @@ class App extends Component {
     return (
       <Aux>
         <Navigation search={this.handleSearchInput}/>
-		  {this.state.searchResults.length > 0 ? <EventList title="Searched" events={this.state.searchResults} /> : null}
+		  {this.state.searchResults.length > 0 && this.state.search !== ''  ? <EventList title="Searched" events={this.state.searchResults} /> : null}
         <EventList title="Most Recent" events={this.state.recent} />
         <EventList title="All" events={this.state.all} />
         <Footer />

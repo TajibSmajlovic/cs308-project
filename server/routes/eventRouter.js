@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 const eventController = require('../controllers/eventController.js');
-const checkAuth = require('../checkAuth');
+/*const checkAuth = require('../checkAuth');*/
 
 router.post('/', eventController.createEvent);
 

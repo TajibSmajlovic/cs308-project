@@ -408,8 +408,12 @@ export default class SeatsMap extends React.Component {
     ]
   };
 
-  handleChange = id => {
-    console.log(id);
+  handleChange = (seat, status) => {
+  	const {seats} = this.state
+	  seats[seat.id -1].available = !status
+	  this.setState({seats})
+	  console.log(status)
+
   };
 
   displaySeats = seats =>
@@ -418,17 +422,32 @@ export default class SeatsMap extends React.Component {
         id={seat.id}
         // available={seat.available}
         name={seat.available ? " calendar check outline" : "calendar minus"}
-        disabled={!seat.available}
+        //disabled={!seat.available}
         size="big"
         link
-        onClick={() => this.handleChange(seat.id)}
+        onClick={() => this.handleChange(seat, seat.available)}
       />
     ));
+
+   calculatePrice = () => {
+
+
+  	let test = []
+  	let price = 10
+  	this.state.seats.map(seat => {
+  		if (!seat.available) {
+			price += 10
+		}
+	})
+
+	  console.log(price)
+  }
 
   render() {
     return (
       <div style={{ textAlign: "center" }}>
         {this.displaySeats(this.state.seats)}
+		  {this.calculatePrice()}
       </div>
     );
   }
