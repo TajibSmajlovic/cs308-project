@@ -6,4 +6,5 @@ body > div > div  {
 
 .Grid {
     height: 100%!important;
+    margin-top: -10% !important;
 }
