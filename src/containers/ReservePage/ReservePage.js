@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { Modal, Button, Header } from "semantic-ui-react";
 import * as actions from '../../store/creators/async-creators'
 import CinemaSeats from '../SeatsMap/CinemaSeats/CinemaSeats'
+import CreditCardPayment from "./Payment/CreditCardPayment/CreditCardPayment";
 
 class ReservePage extends Component {
 
@@ -38,9 +39,21 @@ class ReservePage extends Component {
   }
 
   book = () => {
-    this.props.book({ id: this.props.event._id, seats: this.state.seats })
+    if (!this.state.currentPurchase.length) return;
+    this.props.book({
+      event:{
+        id: this.props.event._id,
+        title: this.props.event.title,
+        venue: this.props.event.venue,
+        date: this.props.event.date,
+        time: this.props.event.time,
+      },
+      seats: this.state.seats,
+      purchases: this.state.currentPurchase,
+      user: this.props.user
+    })
       .then(res => {
-        this.props.history.replace('/')
+        this.props.history.replace('/login')
       })
   }
 
@@ -71,7 +84,8 @@ class ReservePage extends Component {
           </Modal.Description>
         </Modal.Content>
         <hr />
-		  <Modal.Content scrolling>
+		  {this.props.user ? (
+      <Modal.Content>
 			  <Header as="h3" textAlign="center" content="SELECT SEATS" />
 			  <div
 				  style={{
@@ -81,17 +95,22 @@ class ReservePage extends Component {
             padding: 20,
 				  }}
 			  >
-				  <CinemaSeats user={this.props.user} changeHandler={this.changeHandler} seats={this.state.seats}/>
+				  <CinemaSeats currentPurchase={this.state.currentPurchase} user={this.props.user} changeHandler={this.changeHandler} seats={this.state.seats}/>
 			  </div>
 			  <div style={{display: 'flex', alignItems: 'center'}}>
 				  <h3>Price <b>{this.state.currentPurchase.length * 10} BAM</b></h3>
           <div style={{marginLeft: 'auto'}}>
             <Button content="Card" primary />
-            <Button content="PayPal" secondary />
+            <Button content="PayPal" onClick={() => window.open('https://www.paypal.com/login', '_blank', 'width=600,height=400')} secondary />
           </div>
         </div>
-        <Button content="Submit" onClick={this.book} />
-		  </Modal.Content>
+        <CreditCardPayment book={this.book} />
+		  </Modal.Content>): (
+        <Modal.Content style={{textAlign: 'center'}}>
+          <h2 style={{color: "#777", textAlign: 'center'}}>You have to be logged in, in order to select a seat</h2>
+          <Link to="/login">Login</Link>
+        </Modal.Content>
+      )}
       </Modal>
     );
   }
