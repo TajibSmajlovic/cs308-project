@@ -15,11 +15,11 @@ class ReservePage extends Component {
   changeHandler = (id) => {
     const { seats } = this.state
     if(seats[id - 1].user){
-      if(seats[id - 1].user == this.props.user._id && this.state.currentPurchase.indexOf(id) != -1){
+      if(seats[id - 1].user === this.props.user._id && this.state.currentPurchase.indexOf(id) !== -1){
         seats[id - 1].user = null;
         this.setState(prev => ({
           seats,
-          currentPurchase: prev.currentPurchase.filter(seatId => seatId != id)
+          currentPurchase: prev.currentPurchase.filter(seatId => seatId !== id)
         }))
       }
     }else{

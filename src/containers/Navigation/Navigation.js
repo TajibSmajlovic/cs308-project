@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import { Grid, Menu, Input } from "semantic-ui-react";
 import { connect } from 'react-redux'
 import * as actions from '../../store/creators/auth-creators'
 import Aux from "../../hoc/Auxiliary/Auxiliary";
+import NavLogo from '../../components/NavLogo/NavLogo'
 
 class Navigation extends Component {
   state = { activeItem: "home" };
@@ -15,11 +16,13 @@ class Navigation extends Component {
     const { search } = this.props;
 
     return (
-      <Grid style={{ height: "8vh" }}>
+      <Grid style={{ height: "5vh" }}>
         <Grid.Row>
           <Grid.Column>
             <Menu secondary>
-              <Menu.Item icon="tags" onClick={this.handleItemClick} />
+				<Menu.Item>
+					<NavLogo/>
+				</Menu.Item>
               <Menu.Item
                 name="cinema"
                 active={activeItem === "cinema"}

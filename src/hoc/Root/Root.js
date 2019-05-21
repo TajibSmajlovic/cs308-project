@@ -12,9 +12,9 @@ import * as actions from '../../store/creators/auth-creators'
 
 class Root extends React.Component {
 
-  componentDidMount(){
+/*  componentDidMount(){
     this.props.checkCookies();
-  }
+  }*/
 
   render() {
     return(
