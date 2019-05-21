@@ -6,14 +6,15 @@ import "semantic-ui-css/semantic.min.css";
 import Root from "./hoc/Root/Root";
 import * as serviceWorker from "./serviceWorker";
 
-import { Provider } from 'react-redux'
-import store from './store/config'
+import { Provider } from "react-redux";
+import store from "./store/config";
 
-ReactDOM.render((
-    <Provider store={store}>
-        <Root />
-    </Provider>
-), document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <Root />
+  </Provider>,
+  document.getElementById("root")
+);
 
 // ReactDOM.render(<Root />, document.getElementById("root"));
 

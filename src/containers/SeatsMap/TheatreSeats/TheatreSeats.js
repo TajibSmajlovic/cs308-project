@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react/index";
 
 export default class TheatreSeats extends React.Component {
   state = {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Checkbox, Form, Input, Divider, TextArea, Segment, Header, Dropdown } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Input, Divider, TextArea, Header, Dropdown } from 'semantic-ui-react'
 
 const creditCardsOptions = [
 	{ key: 'visa', text: 'Visa', value: 'visa' },
@@ -22,7 +22,6 @@ const monthsDropdown = () => (
 
 class CreditCardPayment extends Component {
 	state = {}
-
 
 	render() {
 		return (
