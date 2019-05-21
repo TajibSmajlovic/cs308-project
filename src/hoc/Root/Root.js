@@ -6,6 +6,7 @@ import Register from "../../containers/Authentication/Register/Register";
 import Login from "../../containers/Authentication/Login/Login";
 import EventModifer from "../../containers/EventBox/EventBox";
 import Loading from "../../components/Loading/Loading";
+import CreditCardPayment from '../../containers/ReservePage/Payment/CreditCardPayment/CreditCardPayment'
 
 import * as actions from '../../store/creators/auth-creators'
 
@@ -14,6 +15,7 @@ class Root extends React.Component {
   componentDidMount(){
     this.props.checkCookies();
   }
+
   render() {
     return(
       <BrowserRouter>
@@ -23,6 +25,7 @@ class Root extends React.Component {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/create-event" component={EventModifer} />
+          <Route path="/credit" component={CreditCardPayment} />
         </Switch>
       </BrowserRouter>
     )

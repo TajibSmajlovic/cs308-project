@@ -430,8 +430,6 @@ export default class SeatsMap extends React.Component {
     ));
 
    calculatePrice = () => {
-
-
   	let test = []
   	let price = 10
   	this.state.seats.map(seat => {
@@ -439,7 +437,6 @@ export default class SeatsMap extends React.Component {
 			price += 10
 		}
 	})
-
 	  console.log(price)
   }
 
