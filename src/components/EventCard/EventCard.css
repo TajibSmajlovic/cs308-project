@@ -8,6 +8,8 @@
 }
 .EventInfo{
     flex-basis: 45%;
+    display: flex;
+    flex-direction: column;
     padding: 20px ;
 }
 

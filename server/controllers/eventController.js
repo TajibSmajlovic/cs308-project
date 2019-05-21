@@ -36,8 +36,22 @@ const getAll = async (req, res) => {
     }
 }
 
+const book = async (req, res) => {
+    try{
+        await Event.findByIdAndUpdate(req.body.id, {
+            seats: req.body.seats
+        })
+        //send email to the user
+        res.status(200).json({ msg: 'success' });
+    }catch(err){
+        console.log(err.message);
+        res.status(500).end(err.message)
+    }
+}
+
 module.exports = {
     createEvent,
     getMostRecent,
     getAll,
+    book
 };

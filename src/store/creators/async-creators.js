@@ -89,3 +89,20 @@ export const login = (data) => dispatch => {
         dispatch(endLoading())
     })
 }
+
+export const book = (data) => dispatch => {
+    return new Promise((resolve, reject) => {
+        dispatch(startLoading())
+        axios.put('/event/book', {
+            ...data
+        }).then(res => {
+            dispatch(endLoading())
+            resolve(res)
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch(endLoading())
+            reject(err)
+        })
+    })
+}

@@ -1,9 +1,49 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { Modal, Button, Header } from "semantic-ui-react";
+import * as actions from '../../store/creators/async-creators'
+import CinemaSeats from '../SeatsMap/CinemaSeats/CinemaSeats'
 
-import CinemaSeats, {calculatePrice} from '../SeatsMap/CinemaSeats/CinemaSeats'
+class ReservePage extends Component {
 
-export default class ReservePage extends Component {
+  state = {
+    seats: [],
+    currentPurchase: [],
+  }
+
+  changeHandler = (id) => {
+    const { seats } = this.state
+    if(seats[id - 1].user){
+      if(seats[id - 1].user == this.props.user._id && this.state.currentPurchase.indexOf(id) != -1){
+        seats[id - 1].user = null;
+        this.setState(prev => ({
+          seats,
+          currentPurchase: prev.currentPurchase.filter(seatId => seatId != id)
+        }))
+      }
+    }else{
+      seats[id - 1].user = this.props.user._id
+      this.setState(prev => ({
+        seats,
+        currentPurchase: prev.currentPurchase.concat(id)
+      }))
+    }
+  }
+
+  componentDidMount(){
+    this.setState({
+      seats: this.props.event.seats
+    })
+  }
+
+  book = () => {
+    this.props.book({ id: this.props.event._id, seats: this.state.seats })
+      .then(res => {
+        this.props.history.replace('/')
+      })
+  }
+
   render() {
     const date = new Date(this.props.event.date).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     return (
@@ -36,30 +76,27 @@ export default class ReservePage extends Component {
 			  <div
 				  style={{
 					  width: "70%",
-					  border: "1px solid black",
+					  // border: "1px solid black",
 					  margin: "auto",
-					  padding: 20
+            padding: 20,
 				  }}
 			  >
-				  <CinemaSeats />
+				  <CinemaSeats user={this.props.user} changeHandler={this.changeHandler} seats={this.state.seats}/>
 			  </div>
-			  <div
-				  style={{
-					  width: 150,
-					  height: 50,
-					  border: "1px solid black",
-					  display: "inline-block"
-				  }}
-			  >
-				  prive $$
-			  </div>
-			  <Button.Group floated="right">
-				  <Button content="PayPal" primary />
-				  <Button content="Card" secondary />
-				  <Button content="Coupon" color="teal" />
-			  </Button.Group>
+			  <div style={{display: 'flex', alignItems: 'center'}}>
+				  <h3>Price <b>{this.state.currentPurchase.length * 10} BAM</b></h3>
+          <div style={{marginLeft: 'auto'}}>
+            <Button content="Card" primary />
+            <Button content="PayPal" secondary />
+          </div>
+        </div>
+        <Button content="Submit" onClick={this.book} />
 		  </Modal.Content>
       </Modal>
     );
   }
 }
+
+export default connect(state => ({
+  user: state.auth.user
+}), actions)(withRouter(ReservePage))
