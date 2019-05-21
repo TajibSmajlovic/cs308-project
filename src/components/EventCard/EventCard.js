@@ -10,7 +10,8 @@ const EventCard = ({ event }) => {
       <div className="EventInfo">
         <h2>{event.title}</h2>
         <p>On <b>{date}</b> at <b>{event.time}</b> in <b>{event.venue}</b></p>
-        <div style={{ marginTop: "60%" }}>
+        <div style={{ marginTop: 'auto'}}>
+        {/* <div style={{ marginTop: "60%" }}> */}
           <ReservePage event={event} />
         </div>
       </div>
