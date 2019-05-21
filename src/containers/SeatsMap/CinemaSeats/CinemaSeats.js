@@ -8,7 +8,7 @@ class SeatsMap extends React.Component {
       <Icon
         id={seat.id}
         key={seat.id}
-        name={seat.user ? ( seat.user === this.props.user._id ? "calendar minus" : "address book" ) : "calendar check outline"}
+        name={seat.user ? ( (seat.user === this.props.user._id && this.props.currentPurchase.indexOf(seat.id) != -1) ? "calendar minus" : "address book" ) : "calendar check outline"}
         size="big"
         link
         onClick={() => this.props.changeHandler(seat.id)}
