@@ -10,5 +10,6 @@
     height: auto;
 }
 .EventListBox > h2{
-    margin-left: 30px;
+    padding-top: 20px;
+    margin-left: 10px;
 }
