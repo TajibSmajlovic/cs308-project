@@ -29,10 +29,7 @@ const Footer = () => (
               Footer Header
             </Header>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Assumenda cum, dolor eos, est facere in ipsum maxime minus nemo
-              possimus praesentium, saepe soluta. Accusamus distinctio dolorum
-              eius natus quo. Saepe.
+            Cras facilisis hendrerit faucibus. Pellentesque mauris sapien, venenatis sed massa at, consequat aliquam nibh. Curabitur at mollis quam, quis feugiat diam. Pellentesque a cursus metus. 
             </p>
           </Grid.Column>
         </Grid.Row>
