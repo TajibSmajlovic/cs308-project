@@ -4,7 +4,8 @@ import { Grid, Menu, Input } from "semantic-ui-react";
 import { connect } from 'react-redux'
 import * as actions from '../../store/creators/auth-creators'
 import Aux from "../../hoc/Auxiliary/Auxiliary";
-import NavLogo from '../../components/NavLogo/NavLogo'
+import NavLogo from '../../components/NavLogo/NavLogo';
+import "./Navigation.css";
 
 class Navigation extends Component {
   state = { activeItem: "home" };
@@ -21,7 +22,7 @@ class Navigation extends Component {
     const { search } = this.props;
 
     return (
-      <Grid style={{ height: "5vh" }}>
+      <Grid>
         <Grid.Row>
           <Grid.Column>
             <Menu secondary>
