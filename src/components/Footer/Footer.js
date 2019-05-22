@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Grid, List, Segment, Header } from "semantic-ui-react";
+import NavLogo from '../../components/NavLogo/NavLogo'
 
 const Footer = () => (
   <Segment inverted vertical style={{ padding: "3em 0em", height: "20%" }}>
@@ -25,12 +26,11 @@ const Footer = () => (
             </List>
           </Grid.Column>
           <Grid.Column width={7}>
-            <Header as="h4" inverted>
-              Footer Header
-            </Header>
-            <p>
+            <NavLogo/>
+            <p>Sjedi.ba 2019. All Rights Reserved</p>
+            <small>
             Cras facilisis hendrerit faucibus. Pellentesque mauris sapien, venenatis sed massa at, consequat aliquam nibh. Curabitur at mollis quam, quis feugiat diam. Pellentesque a cursus metus. 
-            </p>
+            </small>
           </Grid.Column>
         </Grid.Row>
       </Grid>
