@@ -84,7 +84,7 @@ class ReservePage extends Component {
 
     return (
       <Modal
-        trigger={<Button>Book now</Button>}
+        trigger={<Button primary >Book now</Button>}
         dimmer
         style={{ overflow: "auto" }}
       >
