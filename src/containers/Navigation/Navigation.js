@@ -9,7 +9,12 @@ import NavLogo from '../../components/NavLogo/NavLogo'
 class Navigation extends Component {
   state = { activeItem: "home" };
 
-  handleItemClick = (e, { name }) => { this.setState({ activeItem: name }); this.props.history.push("/")};
+  handleItemClick = (e, { name }) => { 
+    this.setState({ activeItem: name }); 
+    this.props.history.push(
+      name === 'cinema' ? '/cinema' : name === 'theater' ? '/theater' : '/'
+    )
+  };
 
   render() {
     const { activeItem } = this.state;

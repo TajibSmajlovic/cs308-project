@@ -37,6 +37,14 @@ const getAll = async (req, res) => {
     }
 }
 
+const getCinema = async (req, res) => {
+    console.log('get cinema')
+}
+
+const getTheater = async (req, res) => {
+    console.log('get theater')
+}
+
 const book = async (req, res) => {
     try{
         await Event.findByIdAndUpdate(req.body.event.id, {
@@ -80,5 +88,7 @@ module.exports = {
     createEvent,
     getMostRecent,
     getAll,
-    book
+    book,
+    getCinema,
+    getTheater
 };
