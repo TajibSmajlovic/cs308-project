@@ -4,7 +4,7 @@ import { Grid, Menu, Input } from "semantic-ui-react";
 import { connect } from 'react-redux'
 import * as actions from '../../store/creators/auth-creators'
 import Aux from "../../hoc/Auxiliary/Auxiliary";
-import NavLogo from '../../components/NavLogo/NavLogo';git 
+import NavLogo from '../../components/NavLogo/NavLogo';
 import "./Navigation.css";
 
 class Navigation extends Component {
