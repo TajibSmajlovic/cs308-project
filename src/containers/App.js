@@ -15,6 +15,13 @@ class App extends Component {
     searchResults: []
   };
 
+ /*<Router>
+    
+    <link> Cinema </link>
+    <Route path = "/" exact strict render; ></Route>
+    
+     </Router>*/
+
   componentWillMount() {
     this.props.getEvents().then(res => {
       console.log(res);

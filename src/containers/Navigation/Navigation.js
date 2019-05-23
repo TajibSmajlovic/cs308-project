@@ -4,7 +4,7 @@ import { Grid, Menu, Input } from "semantic-ui-react";
 import { connect } from 'react-redux'
 import * as actions from '../../store/creators/auth-creators'
 import Aux from "../../hoc/Auxiliary/Auxiliary";
-import NavLogo from '../../components/NavLogo/NavLogo';
+import NavLogo from '../../components/NavLogo/NavLogo';git 
 import "./Navigation.css";
 
 class Navigation extends Component {
@@ -12,9 +12,7 @@ class Navigation extends Component {
 
   handleItemClick = (e, { name }) => { 
     this.setState({ activeItem: name }); 
-    this.props.history.push(
-      name === 'cinema' ? '/cinema' : name === 'theater' ? '/theater' : '/'
-    )
+    
   };
 
   render() {
@@ -39,6 +37,7 @@ class Navigation extends Component {
                 active={activeItem === "theater"}
                 onClick={this.handleItemClick}
               />
+              
               <Menu.Item
                 name="party"
                 active={activeItem === "party"}
